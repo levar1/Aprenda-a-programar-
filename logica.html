@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha de Lógica - AprendaCode</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">Trilha de Lógica 🧠</div>
+        <a href="index.html" class="back-btn">← Voltar ao Dashboard</a>
+    </header>
+
+    <main class="quiz-page">
+        <div class="mission-header">
+            <h1>Exercício de Lógica</h1>
+            <p>Qual é a saída desse código?</p>
+        </div>
+
+        <div class="quiz-card">
+            <pre>
+for(let i = 1; i <= 5; i++) {
+    console.log(i);
+}</pre>
+            <div class="options">
+                <button onclick="wrongAnswer()">1 2 3 4</button>
+                <button onclick="correctAnswer()">1 2 3 4 5</button>
+                <button onclick="wrongAnswer()">2 3 4 5 6</button>
+                <button onclick="wrongAnswer()">Erro</button>
+            </div>
+        </div>
+
+        <button onclick="submitLogicMission()" class="btn-success big">Submeter Resposta 🏆</button>
+    </main>
+
+    <!-- Popup de Vitória -->
+    <div id="victory-popup" class="popup-hidden">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closeVictory()">✖</button>
+            <div class="medal"><div class="medal-icon">✓</div></div>
+            <h2>Correto!</h2>
+            <p>Você acertou a lógica do loop!</p>
+            <div class="rewards">
+                <div class="reward">+120 XP</div>
+                <div class="reward">+60 💎</div>
+            </div>
+            <button onclick="closeVictory()" class="btn-primary">Próximo Exercício</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function correctAnswer() {
+            alert("Correto! 🎉");
+        }
+        function wrongAnswer() {
+            alert("Tente novamente!");
+        }
+        function submitLogicMission() {
+            triggerVictory("Exercício de lógica concluído!");
+            confetti({ particleCount: 120, spread: 70 });
+        }
+    </script>
+</body>
+</html>

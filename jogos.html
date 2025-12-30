@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha de Jogos - AprendaCode</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">Trilha de Jogos 🎮</div>
+        <a href="index.html" class="back-btn">← Voltar ao Dashboard</a>
+    </header>
+
+    <main class="game-page">
+        <div class="mission-header">
+            <h1>Missão: Bola Quicando com Física</h1>
+            <p>Edite o código JavaScript para mudar velocidade, cor ou gravidade.</p>
+        </div>
+
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+
+        <div class="code-editor">
+            <textarea id="game-code">// Bola simples com gravidade
+let x = 300, y = 100;
+let vx = 5, vy = 0;
+let gravity = 0.5;
+let bounce = 0.8;
+let color = "#ff6b6b";
+
+function animate() {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    vy += gravity;
+    y += vy;
+    x += vx;
+
+    if (y > canvas.height - 20) {
+        y = canvas.height - 20;
+        vy *= -bounce;
+    }
+    if (x > canvas.width - 20 || x < 20) vx *= -1;
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, 20, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(animate);
+}
+animate();</textarea>
+            <button onclick="runGame()" class="btn-primary">Rodar Jogo</button>
+            <button onclick="submitGameMission()" class="btn-success">Submeter Missão 🏆</button>
+        </div>
+    </main>
+
+    <!-- Popup de Vitória -->
+    <div id="victory-popup" class="popup-hidden">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closeVictory()">✖</button>
+            <div class="medal"><div class="medal-icon">✓</div></div>
+            <h2>Ótimo!</h2>
+            <p>Você controlou física em um jogo!</p>
+            <div class="rewards">
+                <div class="reward">+180 XP</div>
+                <div class="reward">+100 💎</div>
+            </div>
+            <button onclick="closeVictory()" class="btn-primary">Continuar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function runGame() {
+            const code = document.getElementById('game-code').value;
+            const script = document.createElement('script');
+            script.innerHTML = code;
+            document.body.appendChild(script);
+        }
+
+        function submitGameMission() {
+            triggerVictory("Missão de Jogos concluída!");
+            confetti({ particleCount: 200, spread: 100 });
+        }
+
+        runGame(); // Inicia o jogo padrão
+    </script>
+</body>
+</html>

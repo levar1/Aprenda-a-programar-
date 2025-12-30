@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AprendaCode - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">AprendaCode 🚀</div>
+        <div class="user-info">
+            <span id="streak">🔥 23 dias</span>
+            <span id="points">2.450 💎</span>
+            <div class="avatar">😎</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="welcome-card">
+            <h1>Bem-vindo de volta!</h1>
+            <p>Escolha uma trilha e continue aprendendo do zero ao profissional</p>
+        </div>
+
+        <div class="trails-grid">
+            <a href="sites.html" class="trail-card">
+                <div class="icon">🌐</div>
+                <h2>Trilha de Sites</h2>
+                <p>HTML, CSS, JavaScript, React e sites completos</p>
+                <div class="progress-bar"><div class="fill" style="width:42%"></div></div>
+                <span>42% completo</span>
+            </a>
+
+            <a href="jogos.html" class="trail-card">
+                <div class="icon">🎮</div>
+                <h2>Trilha de Jogos</h2>
+                <p>JavaScript Canvas, Godot, Unity e física</p>
+                <div class="progress-bar"><div class="fill" style="width:28%"></div></div>
+                <span>28% completo</span>
+            </a>
+
+            <a href="logica.html" class="trail-card">
+                <div class="icon">🧠</div>
+                <h2>Trilha de Lógica</h2>
+                <p>Algoritmos, puzzles e pensamento programador</p>
+                <div class="progress-bar"><div class="fill" style="width:65%"></div></div>
+                <span>65% completo</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Popup de Vitória -->
+    <div id="victory-popup" class="popup-hidden">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closeVictory()">✖</button>
+            <div class="medal"><div class="medal-icon">✓</div></div>
+            <h2>Parabéns!</h2>
+            <p id="victory-text">Você está progredindo incrivelmente!</p>
+            <div class="rewards">
+                <div class="reward">+100 XP</div>
+                <div class="reward">+50 💎</div>
+            </div>
+            <button onclick="closeVictory()" class="btn-primary">Continuar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha de Sites - AprendaCode</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">Trilha de Sites 🌐</div>
+        <a href="index.html" class="back-btn">← Voltar ao Dashboard</a>
+    </header>
+
+    <main class="editor-page">
+        <div class="mission-header">
+            <h1>Missão: Crie sua Página Pessoal</h1>
+            <p>Use HTML e CSS para fazer uma página com seu nome, foto e descrição.</p>
+        </div>
+
+        <div class="editor-container">
+            <div class="code-panel">
+                <div class="tabs">
+                    <button class="tab active" onclick="openTab('html')">HTML</button>
+                    <button class="tab" onclick="openTab('css')">CSS</button>
+                    <button class="tab" onclick="openTab('js')">JS</button>
+                </div>
+                <textarea id="html-code"><!DOCTYPE html>
+<html>
+<head><title>Minha Página</title></head>
+<body>
+    <h1>Olá! Eu sou [Seu Nome]</h1>
+    <img src="https://via.placeholder.com/200" alt="Sua foto">
+    <p>Estou aprendendo programação e criando meu primeiro site!</p>
+</body>
+</html></textarea>
+                <textarea id="css-code" style="display:none;">body { font-family: Arial; text-align: center; background: #f0f8ff; padding: 40px; }
+h1 { color: #764ba2; }
+img { border-radius: 50%; }</textarea>
+                <textarea id="js-code" style="display:none;">console.log("Olá do JavaScript!");</textarea>
+            </div>
+
+            <div class="preview-panel">
+                <iframe id="preview"></iframe>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="runCode()" class="btn-primary">Ver Resultado</button>
+            <button onclick="submitMission()" class="btn-success">Submeter Missão 🏆</button>
+        </div>
+    </main>
+
+    <!-- Popup de Vitória -->
+    <div id="victory-popup" class="popup-hidden">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closeVictory()">✖</button>
+            <div class="medal"><div class="medal-icon">✓</div></div>
+            <h2>Incrível!</h2>
+            <p>Você criou seu primeiro site!</p>
+            <div class="rewards">
+                <div class="reward">+150 XP</div>
+                <div class="reward">+80 💎</div>
+            </div>
+            <button onclick="closeVictory()" class="btn-primary">Continuar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function runCode() {
+            let html = document.getElementById('html-code').value;
+            let css = "<style>" + document.getElementById('css-code').value + "</style>";
+            let js = "<script>" + document.getElementById('js-code').value + "<\/script>";
+            let frame = document.getElementById('preview').contentWindow.document;
+            frame.open(); frame.write(html + css + js); frame.close();
+        }
+
+        function openTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('textarea').forEach(t => t.style.display = 'none');
+            document.getElementById(tab + '-code').style.display = 'block';
+            runCode();
+        }
+
+        function submitMission() {
+            triggerVictory("Missão de Sites concluída!");
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+        }
+
+        runCode();
+    </script>
+</body>
+</html>
