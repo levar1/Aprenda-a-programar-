@@ -1,31 +1,40 @@
-// script.js - Versão final anti-bug
+// script.js - Recompensas sutis sem popup
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Garante que popup começa escondido ao carregar qualquer página
-    const popup = document.getElementById('victory-popup');
-    if (popup) {
-        popup.classList.add('popup-hidden');
+function showReward(xp = 100, gems = 50, text = "Missão concluída!") {
+    // Atualiza os números no header (valores reais você pode salvar com localStorage depois)
+    const pointsEl = document.getElementById('points');
+    const streakEl = document.getElementById('streak');
+
+    if (pointsEl) {
+        let current = parseInt(pointsEl.textContent.replace(/\D/g,'')) || 0;
+        pointsEl.textContent = (current + gems) + " 💎";
     }
-});
 
-function triggerVictory(text = "Você está progredindo incrivelmente!") {
-    const popupText = document.getElementById('victory-text');
-    if (popupText) popupText.textContent = text;
+    // Animação de texto subindo "+XP" e "+Gems"
+    const rewardAnim = document.createElement('div');
+    rewardAnim.className = 'reward-animation';
+    rewardAnim.innerHTML = `
+        <div>+${xp} XP</div>
+        <div>+${gems} 💎</div>
+        <div style="font-size:14px; margin-top:5px;">${text}</div>
+    `;
+    document.body.appendChild(rewardAnim);
 
-    const popup = document.getElementById('victory-popup');
-    if (popup) popup.classList.remove('popup-hidden');
+    // Remove após animação
+    setTimeout(() => rewardAnim.remove(), 3000);
 
+    // Confetti leve
     if (typeof confetti !== 'undefined') {
         confetti({
-            particleCount: 180,
-            spread: 90,
+            particleCount: 80,
+            spread: 60,
             origin: { y: 0.6 },
-            colors: ['#ff6b6b', '#764ba2', '#ffd700', '#51cf66', '#ff9ff3']
+            colors: ['#ff6b6b', '#764ba2', '#ffd700', '#51cf66']
         });
     }
 }
 
-function closeVictory() {
-    const popup = document.getElementById('victory-popup');
-    if (popup) popup.classList.add('popup-hidden');
-}
+// Exemplo de uso nas trilhas (você chama isso nos botões de submeter)
+function completeMission(xp, gems, message) {
+    showReward(xp, gems, message);
+            }
