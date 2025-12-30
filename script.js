@@ -11,7 +11,7 @@ function triggerVictory(text = "Você está progredindo incrivelmente!") {
         popup.classList.remove('popup-hidden');
     }
 
-    // Confetti de celebração
+    // Confetti de celebração (só quando chamado)
     if (typeof confetti !== 'undefined') {
         confetti({
             particleCount: 150,
@@ -29,7 +29,4 @@ function closeVictory() {
     }
 }
 
-// Função para testar no dashboard (opcional)
-function testVictory() {
-    triggerVictory("Teste de vitória funcionando! 🏆");
-}
+// Sem chamadas automáticas aqui! O popup só aparece quando você chama triggerVictory() em botões de missão
